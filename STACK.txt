@@ -1,0 +1,30 @@
+public class Stack<E>
+extends Vector<E>
+The Stack class represents a last-in-first-out (LIFO) stack of objects. It extends class Vector with five operations that allow a
+vector to be treated as a stack. The usual push and pop operations are provided, as well as a method to peek at the top item on the stack,
+a method to test for whether the stack is empty, and a method to search the stack for an item and discover how far it is from the top.
+When a stack is first created, it contains no items.
+
+A more complete and consistent set of LIFO stack operations is provided by the Deque interface and its implementations, which should be used in preference to this class. For example:
+Deque<Integer> stack = new ArrayDeque<Integer>();
+
+Generally Stack abstract type is used for single linked list which we are only ably add element to front and remove from front.
+In java we have also this implementation which's Stack class is one of them.
+
+
+Word of stack might create confusing because there is Stack abstract data structure and there is Stack class which is one of the Stack abstract
+data structure in Java. Because generally stack abstract data structure menas data structure which provides LIFO (last-in-first-out) ;
+
+Because Stack class extends Vector class it actually use Vector in the behind. What we sad about Vector they are some for Stack class.
+Because Vector class is thread safe it will have forformance porblems and if we don't need thread safe functionality then we can use
+other implementation of Stack data structures in java. For example ArrayDeque or LinkedList. They are also stack implementations.
+Generally in java if we need to create our own stack implementation it is recomended use Deque interface. Because it provides
+more complete and consistent set of LIFO stack operation.
+
+Just let's keep our mind Stack class has 3 main methods push() and pop().
+push() is used to add new item to front of stack.
+pop() remove first item from front of stack and return that removed item back to us. If stack is empty it will throw EmptyStackException.
+peek() return first item from front of stack. If stack is empty it will throw EmptyStackException.
+
+
+

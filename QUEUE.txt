@@ -1,0 +1,126 @@
+A collection designed for holding elements prior to processing. Besides basic Collection operations, queues provide additional insertion,
+extraction, and inspection operations. Each of these methods exists in two forms: one throws an exception if the operation fails,
+the other returns a special value (either null or false, depending on the operation). The latter form of the insert operation is
+designed specifically for use with capacity-restricted Queue implementations; in most implementations, insert operations cannot fail.
+
+
+            Throws exception	Returns special value
+Insert	    add(e)	            offer(e)
+Remove	    remove()	        poll()
+Examine	    element()	        peek()
+
+Queues typically, but do not necessarily, order elements in a FIFO (first-in-first-out) manner. Among the exceptions are priority queues,
+which order elements according to a supplied comparator, or the elements' natural ordering, and LIFO queues (or stacks) which order the
+elements LIFO (last-in-first-out). Whatever the ordering used, the head of the queue is that element which would be removed by a call to
+remove() or poll(). In a FIFO queue, all new elements are inserted at the tail of the queue. Other kinds of queues may use different placement
+rules. Every Queue implementation must specify its ordering properties.
+
+The offer method inserts an element if possible, otherwise returning false. This differs from the Collection.add method, which can fail to
+add an element only by throwing an unchecked exception. The offer method is designed for use when failure is a normal, rather than exceptional
+occurrence, for example, in fixed-capacity (or "bounded") queues.
+
+The remove() and poll() methods remove and return the head of the queue. Exactly which element is removed from the queue is a function of
+the queue's ordering policy, which differs from implementation to implementation. The remove() and poll() methods differ only in their
+behavior when the queue is empty: the remove() method throws an exception, while the poll() method returns null.
+
+The element() and peek() methods return, but do not remove, the head of the queue.
+
+The Queue interface does not define the blocking queue methods, which are common in concurrent programming. These methods, which wait for
+elements to appear or for space to become available, are defined in the BlockingQueue interface, which extends this interface.
+
+Queue implementations generally do not allow insertion of null elements, although some implementations, such as LinkedList, do not prohibit
+insertion of null. Even in the implementations that permit it, null should not be inserted into a Queue, as null is also used as a special
+return value by the poll method to indicate that the queue contains no elements.
+
+Lets take a look some well know implementation of Queue interface in java.
+
+ArrayBlockingQueue
+
+A bounded blocking queue backed by an array. This queue orders elements FIFO (first-in-first-out). The head of the queue is that element
+that has been on the queue the longest time. The tail of the queue is that element that has been on the queue the shortest time.
+New elements are inserted at the tail of the queue, and the queue retrieval operations obtain elements at the head of the queue.
+This is a classic "bounded buffer", in which a fixed-sized array holds elements inserted by producers and extracted by consumers.
+Once created, the capacity cannot be changed. Attempts to put an element into a full queue will result in the operation blocking;
+attempts to take an element from an empty queue will similarly block.
+
+This class supports an optional fairness policy for ordering waiting producer and consumer threads. By default, this ordering is not
+guaranteed. However, a queue constructed with fairness set to true grants threads access in FIFO order. Fairness generally decreases
+throughput but reduces variability and avoids starvation.
+
+LinkedBlockingQueue
+
+An optionally-bounded blocking queue based on linked nodes. This queue orders elements FIFO (first-in-first-out). The head of the queue is
+that element that has been on the queue the longest time. The tail of the queue is that element that has been on the queue the shortest time.
+New elements are inserted at the tail of the queue, and the queue retrieval operations obtain elements at the head of the queue. Linked queues
+typically have higher throughput than array-based queues but less predictable performance in most concurrent applications.
+The optional capacity bound constructor argument serves as a way to prevent excessive queue expansion. The capacity, if unspecified, is equal to
+Integer.MAX_VALUE. Linked nodes are dynamically created upon each insertion unless this would bring the queue above capacity.
+
+
+ConcurrentLinkedQueue
+
+An unbounded thread-safe queue based on linked nodes. This queue orders elements FIFO (first-in-first-out). The head of the queue
+is that element that has been on the queue the longest time. The tail of the queue is that element that has been on the queue the shortest time.
+New elements are inserted at the tail of the queue, and the queue retrieval operations obtain elements at the head of the queue.
+A ConcurrentLinkedQueue is an appropriate choice when many threads will share access to a common collection. Like most other concurrent collection
+implementations, this class does not permit the use of null elements.
+
+
+PriorityQueue
+
+An unbounded priority queue based on a priority heap. The elements of the priority queue are ordered according to their natural ordering,
+or by a Comparator provided at queue construction time, depending on which constructor is used. A priority queue does not permit null elements.
+A priority queue relying on natural ordering also does not permit insertion of non-comparable objects (doing so may result in ClassCastException).
+
+The head of this queue is the least element with respect to the specified ordering. If multiple elements are tied for least value, the head
+is one of those elements -- ties are broken arbitrarily. The queue retrieval operations poll, remove, peek, and element access the element
+at the head of the queue.
+
+A priority queue is unbounded, but has an internal capacity governing the size of an array used to store the elements on the queue. It is always
+at least as large as the queue size. As elements are added to a priority queue, its capacity grows automatically. The details of the growth policy
+are not specified.
+
+This class and its iterator implement all of the optional methods of the Collection and Iterator interfaces. The Iterator provided in
+method iterator() is not guaranteed to traverse the elements of the priority queue in any particular order. If you need ordered traversal,
+consider using Arrays.sort(pq.toArray()).
+
+Note that this implementation is not synchronized. Multiple threads should not access a PriorityQueue instance concurrently if any of the
+threads modifies the queue. Instead, use the thread-safe PriorityBlockingQueue class.
+
+Implementation note: this implementation provides O(log(n)) time for the enqueing and dequeing methods (offer, poll, remove() and add);
+linear time for the remove(Object) and contains(Object) methods; and constant time for the retrieval methods (peek, element, and size).
+
+
+PriorityBlockingQueue
+
+An unbounded blocking queue that uses the same ordering rules as class PriorityQueue and supplies blocking retrieval operations. While this
+queue is logically unbounded, attempted additions may fail due to resource exhaustion (causing OutOfMemoryError). This class does not permit
+null elements. A priority queue relying on natural ordering also does not permit insertion of non-comparable objects (doing so results in
+ClassCastException).
+This class and its iterator implement all of the optional methods of the Collection and Iterator interfaces.
+The Iterator provided in method iterator() is not guaranteed to traverse the elements of the PriorityBlockingQueue in any particular order.
+If you need ordered traversal, consider using Arrays.sort(pq.toArray()). Also, method drainTo can be used to remove some or all elements
+in priority order and place them in another collection.
+
+SynchronousQueue
+
+A blocking queue in which each insert operation must wait for a corresponding remove operation by another thread, and vice versa.
+A synchronous queue does not have any internal capacity, not even a capacity of one. You cannot peek at a synchronous queue because an
+element is only present when you try to remove it; you cannot insert an element (using any method) unless another thread is trying to remove it;
+you cannot iterate as there is nothing to iterate. The head of the queue is the element that the first queued inserting thread is trying to
+add to the queue; if there is no such queued thread then no element is available for removal and poll() will return null. For purposes of
+other Collection methods (for example contains), a SynchronousQueue acts as an empty collection. This queue does not permit null elements.
+
+
+
+We should keep our mind because Deque interface extends Queue interface practically All implementations of Deque are also Queue.
+I will talk about Deques in another section
+
+And basically ArrayDeque, ConcurrentLinkedQueue, LinkedBlockingDeque, LinkedList are also queue because they are deque.
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+The Vector class implements a growable array of objects. Like an array, it contains components that can be accessed using an integer index.
+However, the size of a Vector can grow or shrink as needed to accommodate adding and removing items after the Vector has been created.
+
+Each vector tries to optimize storage management by maintaining a capacity and a capacityIncrement. The capacity is always at least as
+large as the vector size; it is usually larger because as components are added to the vector, the vector's storage increases in chunks
+the size of capacityIncrement. An application can increase the capacity of a vector before inserting a large number of components;
+this reduces the amount of incremental reallocation.
+
+As of the Java 2 platform v1.2, this class was retrofitted to implement the List interface, making it a member of the
+Java Collections Framework. Unlike the new collection implementations,
+Vector is synchronized. If a thread-safe implementation is not needed, it is recommended to use ArrayList in place of Vector.
+
+Difference between Vector and ArrayList in java?
+All the methods of Vector is synchronized. But, the methods of ArrayList is not synchronized.
+
+Vector or ArrayList? Which is better to use in java?
+In general, executing a ‘synchronized’ method results in costlier performance than a unsynchronized method.
+Keeping the difference in mind, using Vector will incur a performance hit than the ArrayList.
+But, when there is a certain need for thread-safe operation Vector needs to be used.
+
+
+

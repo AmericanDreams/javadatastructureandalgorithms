@@ -1,0 +1,55 @@
+Doubly-linked list implementation of the List and Deque interfaces. Implements all optional list operations, and permits all elements (including null).
+All of the operations perform as could be expected for a doubly-linked list. Operations that index into the list will traverse the list
+from the beginning or the end, whichever is closer to the specified index.
+
+Note that this implementation is not synchronized. If multiple threads access a linked list concurrently, and at least one of the threads
+modifies the list structurally, it must be synchronized externally. (A structural modification is any operation that adds or deletes
+one or more elements; merely setting the value of an element is not a structural modification.) This is typically accomplished
+by synchronizing on some object that naturally encapsulates the list. If no such object exists, the list should be "wrapped" using
+the Collections.synchronizedList method. This is best done at creation time, to prevent accidental unsynchronized access to the list:
+
+List list = Collections.synchronizedList(new LinkedList(...));
+The iterators returned by this class's iterator and listIterator methods are fail-fast:
+if the list is structurally modified at any time after the iterator is created, in any way except through the Iterator's own remove
+or add methods, the iterator will throw a ConcurrentModificationException. Thus, in the face of concurrent modification,
+the iterator fails quickly and cleanly, rather than risking arbitrary, non-deterministic behavior at an undetermined time in the future.
+
+Java LinkedList is builted based Double linked List consept.
+It interface List , Queue, Deque interfaces.
+
+To understand that read this article :
+https://dzone.com/articles/linked-list-journey-continues
+
+Difference between ArrayList and LinkedList
+1)
+    ArrayList internally uses a dynamic array to store the elements.
+    LinkedList internally uses a doubly linked list to store the elements.
+
+2)
+    Manipulation with ArrayList is slow because it internally uses an array. If any element is removed from the array, all the bits are shifted in memory.
+    Manipulation with LinkedList is faster than ArrayList because it uses a doubly linked list, so no bit shifting is required in memory.
+3)
+    An ArrayList class can act as a list only because it implements List only.
+    LinkedList class can act as a list and queue both because it implements List and Deque interfaces.
+4)
+    ArrayList is better for storing and accessing data.
+    LinkedList is better for manipulating data.
+
+
+
+Time complexty of methods of LinkedList.
+
+Because LinkedList uses double Linked List schemae in the bend whenever we will try remove element from list it will take constant time O(1).
+because when we remove an item from linked list any shifting operation is not involved like a ArrayList. Because actually there no any array
+in the back. But if we don't know the which index we wanna remove in order to find the index of the passed object to remove Linkedlist olsa should
+iterate whole list in order to find the index of passed object which take O(n) time like a ArrayList.
+
+When we add an item to front or end of linkedList it takes always O(1) time. Because again any shifting operation is not involved.
+Just Linkedlist will modify the first or last nodes reference to new one.
+
+When we try to add item to spesific index of LinkedList linked list first start to iterate all item from beginning (It is depend on index.
+It can slo start to iterate from end. That is In the worst schenari this iteration process will take O(n/2) time) in order to find one item which
+is placed one item before of passed index to change it's next node to new item. That is why we can say adding item into middle of the linkedList will take
+O(n) time always. but actually O(n/2);
+
+contains object is also works same it need to iterate all items of linkedlist in order to find Object that is why it will take O(n) time.

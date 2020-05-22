@@ -1,0 +1,66 @@
+An ordered collection (also known as a sequence).
+The user of this interface has precise control over where in the list each element is inserted. The user can access elements
+by their integer index (position in the list), and search for elements in the list.
+
+Unlike sets, lists typically allow duplicate elements. More formally, lists typically allow pairs of elements
+e1 and e2 such that e1.equals(e2), and they typically allow multiple null elements if they allow null elements at all.
+It is not inconceivable that someone might wish to implement a list that prohibits duplicates, by throwing runtime exceptions
+when the user attempts to insert them, but we expect this usage to be rare.
+
+And Implementation of List interface like a ArrayList preserve insertion order.
+
+How ArrayList Works Internally ?
+
+JVM stores data of Arraylist in the Array in the back , actually. When we create array it creates array with default capasity.
+which means default length. If we dont pass capasity number in the constructor it uses as 10. It besically create an array which's langth is 10.
+And this arrays type is Object (Object[] ). As we add the data using add() method JVM first check capasity of array.
+If it exits the default capasity it should grow() this capasity first then add new item. That is why Time complexity of adding element
+to Arraylist is not always O(1) but we generallly describe it as O(1).
+
+To grow the capasity menasn JVM will create another array which is bigger then previous one (It has special formula to define the size of
+new array) , then copy all elements of previous array into new one.in this way it will have bigger array now and will start to use it.
+That is why I when we create an ArrayList we are sure it is going to bi big , It can better we would pass capasity in the constructor.
+
+Insertion order is preserved in ArrayList. It means in which order we are adding elements to ArrayList it will store elements in that order.
+When we print the ArrayList it will print in same order as well.
+
+Duplicate elements are accepted in ArrayList.
+
+Null elements are accepted.
+
+Whenever we are trying add element to specific index of array with add (index, item) method, Arraylist will shift
+elements which are after that defined index then insert the our item to particular location. Shifting operation is time consuming.
+That is why we describe time complexity of method add(index, item) as O(n).
+
+Keep in your mind !
+If we need a list in the program which we know that we will add a lot of elements to middle of this list
+then we should not choose the ArrayList.
+
+Because ArrayList keep items in the Array internally , time of get(index) method is O(1).
+
+ArrayList implement interface which's name is RandomAccess. This is marker interface which just shows accessing items of randoms index takes
+small amount of time. Marker interface does not include any method.
+
+Keep in your mind !
+Because of get(index) of ArrayList takes very ittle amount of time if we need a list which we will access with their index ArrayList is
+good chose.
+
+
+When we remove elements from ArrayList with remove method , after removing the object ArrayList should shift the elements to 1 index before each.
+That is why time complexity of remove(index) method is O(n).
+
+Keep in your mind !
+Because remove operation take a lot time if we need a list which we are sure we will do a lot of remove operation from
+middle of list , ArrayList is bad choice.
+
+indexOf(item) method return us index of passed object in ArrayList. Because it should check each item one by one
+time complexity of this is O(n).
+
+contains(item) it uses  indexOf method internally that is why time complexity is O(n) as well.
+
+Keep in your mind !
+ArrayList is not Thread safe.
+
+
+
+

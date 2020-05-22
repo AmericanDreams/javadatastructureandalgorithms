@@ -1,0 +1,226 @@
+what is Data Structures ?
+Data Structures organanises and stores data. For example Array , String etc.
+
+Each Data Structure has advantages and disadvantages. We have to choose the best Data Structure for our purpose.
+For example Array is the best Data Structure If we know the index of item which we wanna get. It is quick and lightweight. But if we dont know we have to operate on it
+to find data which is needed for us.
+
+Unfortunetely, there is no any one the best Data Structures over there which we can use this for each purpose. That is why We have to know them deeply to be able
+to pick up the most convanient one for our purpose.
+
+What is Algorithms ?
+Algorithms describes the steps which we should perform to accomplish the specific task.
+For example making a a algorithm :
+1. Boil the water
+2. Pour into glass
+3. Put the teabag into water
+4. Wait for 5 minutes
+5. Take teabag out of tea
+Done. Tea is ready.
+
+Important !
+There can be more then one algorithms to accomplish the same task !
+Also There can be more then one implementation of the same algorithm.
+
+For example we have Selection , Bubble , Insertion algorithms for sorting.
+And also let's take Bubble sort algorithms. There can be which is likely have more than one implementation of the Bubble sort.
+
+How can we compare the algorithms against each-other ?
+So, We can think that simply we can run 2 algorithms and log their beginning and finish time. Then compare that to find which one is fast ?
+Unfortunately, It is not like this. Because when we run algorithms result is always depend on hardware we are running this algorithm on.
+If we would run same algorithm on PC  made at 2020 and PC made at 2000 years we will see there is big difference.
+That is why we need to find unique things to compare them.
+
+They are 2 uniques things which we can compare algorithms with.
+Time complexity and Memory Complexity.
+
+What is Memory complexity ?
+Memory complexity describes how much memory involved to run algorithm.
+Nowadays, because memory is cheap we don't consider that much to reduce the Memory complexity of algorithms.
+
+What is Time complexity ?
+Time complexity describes how many steps are involved to run algorithm.
+
+Keep in your mind !
+When we compare the time complexity of the algorithms we always take their worst case scenario.
+
+What is Big O Notation.
+Big O notation is used to describe the time or memory complexity of algorithms. Big O specially describes the worst case scenario.
+Let's give some example of Big O.
+1. O(1)
+2. O(n)
+3. O(log)
+4. O(nlog)
+5. O(n²)
+etc.
+
+Let's try to describe what are they ?
+First let's write one algorithm here to scoop out the sugar from sugar cap and pour into tea mug to make our tea sweet.
+
+1. Take sugar cap on your hand
+2. Take spoon on your hand
+3. Scoop out sugar using the spoon
+4. Pour sugar into the mug from spoon
+5. If it is not enough move back to 3rd step again.
+
+In this algorithm we see if we desire only 1 spoon of sugar only 4 steps should be involved to accomplish the task. But lets assume we like tea
+with 2 spoons of sugar. Then 6 steps should be involved. Lets assume we wanna 2 spoon of sugar. In this case 8 steps should  be involved.
+
+1. For 1 spoon sugar = 4 steps
+1. For 2 spoon sugar = 6 steps
+1. For 3 spoon sugar = 8 steps
+1. For 4 spoon sugar = 10 steps
+1. For 5 spoon sugar = 12 steps
+etc.
+
+If we would like to write connection between sugar and how many steps involved it might be like this :
+a = spoon of sugar
+b = steps
+b = 2a + 2
+
+And as we see this is linear connection. Then with Big O notation we describes it like this : O(n)
+Actually We can think it hat to describe like this O(2n+2). But we dont need to do it like this. It is linear algorithms. That is why we simply
+describes all linear algorithms with O(n).
+
+Here is graphs of some most common O. (url : https://en.wikipedia.org/wiki/Big_O_notation#/media/File:Comparison_computational_complexity.svg)
+
+Array
+
+Array is one the Data Structures in JAVA. And it is not dynamic because once we created array we can not change it's size.
+In the memory level Array is 1 big contiguous block. which means that when we create an array JVM allocates the memory for that array with
+special way.It allocates sequence of bloks for this array with same size of each block. And jVM always protect this memory for this array
+regardless of items are empty or not. That is in java we have same rules for creation of Array in java.
+Every block memory which is using to store one item of Array should allocate same size in Array. That is why when we create array
+we should specify type of it. But why is it used ?
+
+Lets assume we are creating array like below :
+
+int[] intArray = new int[5];
+
+Now JVM will allocate the 5 blocks in memory (this bocks are always neighbour to each other. They are orderly and contiguous) which's memory
+of each block is 4 Byte (because of Integer). And JVM always know where is the beginning of the this big contiguous blok in the memory. For example
+lets assume this big bloks which keeps array in itself start memory 100 (this 100 here is just number. Normally memory number are more complex).
+And help of with these 2 information 1st of them is allocated memory size of each item in array and beginning number of array in memory JVM can
+find easly when we pass it index of Array which we wanna get. how ?
+
+x = BeginningAddressInmemory + ArrayIndex * ItemSize;
+
+That is why Array is very convenient Data Structure for getting data from it if we know exacly index of it. Because whatever is the index
+calculation is always same from JVM side and it is pretty easy.
+Based on the calculation lets write each memory of addess of the indexes of our Array abowe :
+
+x = BeginningAddressInmemory + ArrayIndex * ItemSize;
+BeginningAddressInmemory = 100;
+ItemSize = 4 (Because Integer)
+
+index 0 = 100 + (0 * 4) = 100 (Because beginning point is there)
+index 1 = 100 + (1 * 4) = 104
+index 2 = 100 + (2 * 4) = 108
+index 3 = 100 + (3 * 4) = 112
+index 4 = 100 + (4 * 4) = 116
+
+But for what about the Array of Object ? We can not know size of objects and they are not same always. How JVm manages it ?
+Actually when we create Array of Object and store data there JVM does not store their real values to the blocs of the array. It only
+store their referance adress. And it does not matter what is the size or type of the object their referance have same size always.
+
+Then we can easly calculate Time complexity of algorithm of getting element of array in specific index in JVM side.
+Steps are below :
+
+1. Getting beginning address of array.
+2. Getting size of item of array. (For example in Integer array it is 4 bytes)
+3. Calculate BeginningAddressInmemory + ArrayIndex * ItemSize.
+
+That is all. And we can easly see here we always need constant time to get item of array in spesific index. Then we call Time complexsy here is constant.
+And it is O(1).
+
+But for example lets take a look algorithm of getting array from array in case we dont know it's index. Then we will need here search items of Array
+one bye one until we find it. And in the worst case scenario we might should loop entire array in order to find desired item.
+If array has 100 element we will need 100 steps. if it has 200 we will need 200. It is linear time complexity.
+It is O(n).
+
+Keep in your mind !
+Array is very memory efficient Data Structure because it allocates little amount of memory. Because it does not store any metadata regarding items
+it is very memory efficient. There are a lot of Data structures in java like a List and etc. They store some metadata as well as items of it. But Array
+does not.
+
+Sorting Algorithms.
+
+Bubble Sort
+
+Take a look for implementation
+mir.data.algorithms.sort.BubbleSort.java
+
+Bubble Sort is in in-place Algorithm. Which means that when we run this algorithm we dont need to create extra array.
+We can operate our code on current array. Yes we need to create extra variable (temp) for keeping data temporaly. But it is not a big
+deal.
+
+Definition of In-place algorithm
+In computer science, an in-place algorithm is an algorithm which transforms input using no auxiliary data structure.
+However a small amount of extra storage space is allowed for auxiliary variables. The input is usually
+overwritten by the output as the algorithm executes.
+
+And was we see from implementation It is O(n²) complexity. It will take 100 steps for array that has 10 items. And it
+will take 1000 steps for array which has 100 items so on. However if we would take a look my implementation we see it is not
+exactly n² . It is less than this because in inner loop we take care of the sorting part of array. And that is why
+we dont iterate entire array again by again. But again we call this algorithm is n² because when we describe the time complexity
+of array we dont need to find exactly count of steps. We wanna kinda get general idea that is all. And we have here 2 loop.
+We can simple idendify this as O(n²) algorithm.
+
+Keep in your mind !
+Bubble sort algorithm is one the least efficient algorithm we never have to use it in the real life.
+
+Stable vs Unstable algorithms.
+Stable algorithms preserve relatives order of dublicate items. But unstable algorithms does not. Bubble sort algorithm is
+stable algorithm. But we can easly write unstable implementation of it.But im my implementation it is stable as well.
+
+
+Selection Sort
+
+Take a look for implementation
+mir.data.algorithms.sort.SelectionSort.java
+
+This is also in-place algorithm. And time complexity is O(n²). However it is considered more efficient than Bubble Sort
+because it does not require as much as swapping Bubble sort does.
+And Selection Sort is unstable algorithm. Because when we find The biggest item in array we put to last unsorted index of array.
+And that time maybe that item which was in the last has a same value which we cohsed for swapping. We normally does not check it.
+But of course it is possible to write stable implementation of it.
+
+Insertion Algorithm
+
+Take a look for implementation
+mir.data.algorithms.sort.InsertionSort.java
+
+This  also has O(n²) time complexity. And this is Stable algorithm.Insertion is also in-place algorithm.
+
+Shell sort
+
+Shell sort is optimize version of Insertion Sort algorithm. And it is not stable. But it is also in-place algorithm.
+
+MergeSort algorithm
+
+it is not in-place algorithm because we need to create another array to store datas temporaly. And time complexity is O(nlogn);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
