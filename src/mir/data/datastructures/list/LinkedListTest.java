@@ -8,6 +8,7 @@ public class LinkedListTest {
     public static void main(String[] args) {
 
         LinkedList<String> linkedList = new LinkedList<>();
+        
 
         /**
          * What is the difference between add() and offer() method since both of them do same thing ?
@@ -25,6 +26,7 @@ public class LinkedListTest {
          * */
         linkedList.add("Item 1");
         linkedList.offer("Item 1");
+
 
 
         /**
